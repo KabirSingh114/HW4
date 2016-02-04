@@ -57,5 +57,14 @@ void insertion_sort(int *numbers, unsigned count) {
 	memcpy(numbers, new, count*sizeof(int));
 }
 
-sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, NULL};
+__attribute__ ((weak))
+int CMP(const void* a,const void* b){
+	return (*(int*)a-*(int*)b);
+}
+
+void q_sort(int *numbers, unsigned count){
+	qsort(numbers, count, sizeof(int), CMP);
+}
+
+sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, q_sort, NULL};
 
